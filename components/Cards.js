@@ -20,33 +20,83 @@
 // Add a listener for click events so that when a user clicks on a card, the headline of the article is logged to the console.
 //
 // Use your function to create a card for each of the articles, and append each card to the DOM.
-
-
 const cardContainer = document.querySelector('.cards-container')
 
-function cardMaker(Obj){
+axios 
+.get('https://lambda-times-api.herokuapp.com/articles')
+.then((res) => {
+    const JSArticles = res.data.articles.javascript;
+    console.log(res.data.articles)
+    const bootArticles = res.data.articles.bootstrap;
+    const techArticles = res.data.articles.technology;
+    const nodeArticles = res.data.articles.node;
+    const jqueryArticles = res.data.articles.jquery;
+    JSArticles.forEach(item => {
+        const articles = cardMaker(item)
+        console.log(cardContainer.appendChild(articles))
+    });
+    JSArticles.forEach(item => {
+        const articles = cardMaker(item)
+        console.log(cardContainer.appendChild(articles))
+    });
+    bootArticles.forEach(item => {
+        const articles = cardMaker(item)
+        console.log(cardContainer.appendChild(articles))
+    });
+    techArticles.forEach(item => {
+        const articles = cardMaker(item)
+        console.log(cardContainer.appendChild(articles))
+    });
+    nodeArticles.forEach(item => {
+        const articles = cardMaker(item)
+        console.log(cardContainer.appendChild(articles))
+    });
+    jqueryArticles.forEach(item => {
+        const articles = cardMaker(item)
+        console.log(cardContainer.appendChild(articles))
+    });
+
+    const newCard = cardMaker(articleObj);
+    //    articleObj.forEach(item => {
+    //     const newCard = cardMaker(item)
+    //     cardContainer.appendChild(newCard)
+    //    });
+    })
+    
+    .catch(err =>{
+        console.log('error!')
+    })
+
+
+function cardMaker(obj){
 
     const card = document.createElement('div');
     const headLine = document.createTextNode('div');
     const author = document.createElement('div');
     const imgContainer = document.createElement('div');
-    const image = document.createElement('img');
+    const image2 = document.createElement('img');
     const authorName = document.createElement('span');
+    
+    card.classList.add('card');
+    headLine.classList.add('headline');
+    author.classList.add('author');
+    imgContainer.classList.add('img-container');
+    
 
-    headLine.textContent = Obj.headline;
-    image.src = Obj.authorPhoto;
-    authorName.textContent = `By ${Obj.authorName}`
+    headLine.textContent = obj.headline;
+    image2.src = obj.authorPhoto;
+    authorName.textContent = `By ${obj.authorName}`
 
-    // card.classList.add('card');
-    // headLine.classList.add('headline');
-    // author.classList.add('author');
-    // imgContainer.classList.add('img-container');
     
     card.appendChild(headLine);
     card.appendChild(author);
     author.appendChild(imgContainer);
-    imgContainer.appendChild(image);
+    imgContainer.appendChild(image2);
     author.appendChild(authorName);
+
+    card.addEventListener('click', (event)=>{
+        console.log(headLine.textContent);
+    })
 
     return card
     
@@ -54,18 +104,3 @@ function cardMaker(Obj){
 
 
 
-axios 
-.get('https://lambda-times-api.herokuapp.com/articles')
-.then((res) => {
-    const articleObj = res.data.articles.javascript;
-    console.log(articleObj)
-    const newCard = cardMaker(articleObj);
-       articleObj.forEach(item => {
-        const newCard = cardMaker(item)
-        cardContainer.appendChild(newCard)
-       });
-    })
-    
-    .catch(err =>{
-        console.log('error!')
-    })

@@ -10,25 +10,38 @@
 //
 // NOTE: you do _not_ need to install axios as it's included in the HTML via script element
 
+let topicDiv = document.querySelector('.topics')
+
 axios
     .get('https://lambda-times-api.herokuapp.com/topics')
     .then(res => {
-        const tabArray = res.data.topics;
-        tabArray.forEach(item => {
-            const newTab = tabMaker({Obj: item});
-            tabContainer.appendChild(newTab)
-        });
+
+        res.data.topics.forEach(item => {
+            let div = document.createElement('div')
+            div.classList.add('tab');
+            div.textContent = item;
+            topicDiv.appendChild(div)
+        })
+
+        // const tabArray = res.data.topics;
+        // tabArray.forEach(item => {
+        //     const newTab = tabMaker({Obj: item});
+        //     tabContainer.appendChild(newTab)
+        // });
+    })
+    .catch(error => {
+        console.log(error)
     })
 
-const tabContainer = document.querySelector('span.title')
+// const tabContainer = document.querySelector('.title')
 
-function tabMaker({Obj}){
+// function tabMaker({Obj}){
     
-    const tab = document.createElement('div');
+//     const tab = document.createElement('div');
     
-    tab.classList.add('tab');
+//     tab.classList.add('tab');
 
-    tab.textContent = Obj;
+//     tab.textContent = Obj;
 
-    return tab
-}
+//     return tab
+// }
