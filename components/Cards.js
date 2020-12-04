@@ -24,32 +24,48 @@
 
 const cardContainer = document.querySelector('.cards-container')
 
-function cardMaker({Obj}){
+function cardMaker(Obj){
 
     const card = document.createElement('div');
-    const headline = document.createTextNode('div');
+    const headLine = document.createTextNode('div');
     const author = document.createElement('div');
     const imgContainer = document.createElement('div');
     const image = document.createElement('img');
-    const authorName = document.createElement('span')
+    const authorName = document.createElement('span');
 
-    card.classList.add('card');
-    headline.classList.add('headline');
-    author.classList.add('author');
-    imgContainer.classList.add('img-container');
+    headLine.textContent = Obj.headline;
+    image.src = Obj.authorPhoto;
+    authorName.textContent = `By ${Obj.authorName}`
 
-    card.appendChild(headline);
+    // card.classList.add('card');
+    // headLine.classList.add('headline');
+    // author.classList.add('author');
+    // imgContainer.classList.add('img-container');
+    
+    card.appendChild(headLine);
     card.appendChild(author);
     author.appendChild(imgContainer);
     imgContainer.appendChild(image);
     author.appendChild(authorName);
 
-
-
+    return card
+    
 }
 
+
+
 axios 
-    .get('https://lambda-times-api.herokuapp.com/articles')
-    .then(res => {
-        console.log(res.data.articles)
+.get('https://lambda-times-api.herokuapp.com/articles')
+.then((res) => {
+    const articleObj = res.data.articles.javascript;
+    console.log(articleObj)
+    const newCard = cardMaker(articleObj);
+       articleObj.forEach(item => {
+        const newCard = cardMaker(item)
+        cardContainer.appendChild(newCard)
+       });
+    })
+    
+    .catch(err =>{
+        console.log('error!')
     })
