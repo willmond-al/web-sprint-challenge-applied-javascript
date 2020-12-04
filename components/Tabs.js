@@ -15,14 +15,14 @@ axios
     .then(res => {
         const tabArray = res.data.topics;
         tabArray.forEach(item => {
-            const newTab = tabMaker(item);
+            const newTab = tabMaker({Obj: item});
             tabContainer.appendChild(newTab)
         });
     })
 
 const tabContainer = document.querySelector('span.title')
 
-function tabMaker(Obj){
+function tabMaker({Obj}){
     
     const tab = document.createElement('div');
     
