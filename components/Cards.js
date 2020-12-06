@@ -71,7 +71,7 @@ axios
 function cardMaker(obj){
 
     const card = document.createElement('div');
-    const headLine = document.createTextNode('div');
+    const headLine = document.createElement('div');
     const author = document.createElement('div');
     const imgContainer = document.createElement('div');
     const image2 = document.createElement('img');
