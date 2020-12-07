@@ -26,43 +26,34 @@ axios
 .get('https://lambda-times-api.herokuapp.com/articles')
 .then((res) => {
     const JSArticles = res.data.articles.javascript;
-    console.log(res.data.articles)
     const bootArticles = res.data.articles.bootstrap;
     const techArticles = res.data.articles.technology;
     const nodeArticles = res.data.articles.node;
     const jqueryArticles = res.data.articles.jquery;
     JSArticles.forEach(item => {
         const articles = cardMaker(item)
-        console.log(cardContainer.appendChild(articles))
-    });
-    JSArticles.forEach(item => {
-        const articles = cardMaker(item)
-        console.log(cardContainer.appendChild(articles))
+        cardContainer.appendChild(articles)
     });
     bootArticles.forEach(item => {
         const articles = cardMaker(item)
-        console.log(cardContainer.appendChild(articles))
+        cardContainer.appendChild(articles)
     });
     techArticles.forEach(item => {
         const articles = cardMaker(item)
-        console.log(cardContainer.appendChild(articles))
+        cardContainer.appendChild(articles)
     });
     nodeArticles.forEach(item => {
         const articles = cardMaker(item)
-        console.log(cardContainer.appendChild(articles))
+        cardContainer.appendChild(articles)
     });
     jqueryArticles.forEach(item => {
         const articles = cardMaker(item)
-        console.log(cardContainer.appendChild(articles))
+        cardContainer.appendChild(articles)
     });
 
-    const newCard = cardMaker(articleObj);
-    //    articleObj.forEach(item => {
-    //     const newCard = cardMaker(item)
-    //     cardContainer.appendChild(newCard)
-    //    });
+
     })
-    
+
     .catch(err =>{
         console.log('error!')
     })
